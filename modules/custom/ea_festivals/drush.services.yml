@@ -1,0 +1,5 @@
+services:
+  ea_festivals.commands:
+    class: \Drupal\ea_festivals\Commands\FestivalsCommands
+    tags:
+      - { name: drush.command }

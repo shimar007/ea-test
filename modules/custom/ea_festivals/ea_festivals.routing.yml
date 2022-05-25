@@ -1,0 +1,7 @@
+ea_festivals.form:
+  path: '/admin/config/ea_festivals_config'
+  defaults:
+    _form: '\Drupal\ea_festivals\Form\EAFestivalsConfigForm'
+    _title: 'EA Festivals - Configuration'
+  requirements:
+    _permission: 'administer site configuration'

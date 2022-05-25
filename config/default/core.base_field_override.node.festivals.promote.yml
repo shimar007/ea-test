@@ -1,0 +1,22 @@
+uuid: 0e85e3b4-117c-4434-a50c-94f9e833b7c9
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.festivals
+id: node.festivals.promote
+field_name: promote
+entity_type: node
+bundle: festivals
+label: 'Promoted to front page'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

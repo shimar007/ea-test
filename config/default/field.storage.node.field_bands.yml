@@ -1,0 +1,20 @@
+uuid: 51e45543-aaac-4a12-b2e6-8690f7bf9f82
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_bands
+field_name: field_bands
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

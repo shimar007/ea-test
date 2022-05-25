@@ -1,0 +1,7 @@
+name: EA - Festivals
+description: EA - Festivals Integrations.
+type: module
+core_version_requirement: ^8 || ^9
+package: Custom Modules
+dependencies:
+  - block

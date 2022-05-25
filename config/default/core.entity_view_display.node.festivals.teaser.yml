@@ -1,0 +1,26 @@
+uuid: 7fc32431-ea80-4974-9d58-1c21030ec39d
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.festivals.field_bands
+    - field.field.node.festivals.field_festival_name
+    - field.field.node.festivals.field_record_labels
+    - node.type.festivals
+  module:
+    - user
+id: node.festivals.teaser
+targetEntityType: node
+bundle: festivals
+mode: teaser
+content:
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  field_bands: true
+  field_festival_name: true
+  field_record_labels: true

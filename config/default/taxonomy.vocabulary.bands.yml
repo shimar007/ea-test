@@ -1,0 +1,8 @@
+uuid: c63e7364-3ce1-4257-8744-7991c0fd5483
+langcode: en
+status: true
+dependencies: {  }
+name: Bands
+vid: bands
+description: ''
+weight: 0

@@ -1,0 +1,8 @@
+uuid: 883db172-436d-42ce-935a-2538917a8844
+langcode: en
+status: true
+dependencies: {  }
+name: 'Record Labels'
+vid: record_lab
+description: ''
+weight: 0

@@ -1,0 +1,46 @@
+uuid: cbfeea99-95c0-468b-a603-2f5bc9752cb7
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.festivals.field_bands
+    - field.field.node.festivals.field_festival_name
+    - field.field.node.festivals.field_record_labels
+    - node.type.festivals
+  module:
+    - user
+id: node.festivals.default
+targetEntityType: node
+bundle: festivals
+mode: default
+content:
+  field_bands:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_festival_name:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_record_labels:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }
