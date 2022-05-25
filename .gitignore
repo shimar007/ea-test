@@ -1,3 +1,10 @@
 # Ignore sensitive information
 sites/*/settings.php
 sites/*/settings.local.php
+
+# Ignore paths that may contain user-generated content
+sites/*/files
+sites/*/public
+sites/*/private
+sites/*/files-public
+sites/*/files-private
