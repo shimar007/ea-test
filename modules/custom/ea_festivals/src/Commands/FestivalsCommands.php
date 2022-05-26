@@ -11,7 +11,8 @@ use Drupal\ea_festivals\Controller\FestivalsController;
  * @package Drupal\ea_festivals\Commands
  */
 class FestivalsCommands extends DrushCommands {
-  /**
+  
+   /**
    * Drush command that displays the given text.
    *
    * Argument with message to be displayed.
@@ -26,5 +27,22 @@ class FestivalsCommands extends DrushCommands {
 
     //calling festivals function to get data
     $eafd->get_festivals();
+  }
+
+    /**
+   * Drush command that displays the given text.
+   *
+   * Argument with message to be displayed.
+   * @command ea_festivals:delete_data
+   * @aliases ea_festivals_delete eafdel
+   * @usage ea_festivals
+   */
+  public function delete_data() {
+ 
+    //create a festivals instance
+    $eafd = new FestivalsController;
+
+    //calling festivals function to delete data
+    $eafd->delete_festivals();
   }
 }

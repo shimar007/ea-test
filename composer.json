@@ -15,13 +15,17 @@
         }
     ],
     "require": {
+        "behat/mink": "^1.10",
+        "behat/mink-browserkit-driver": "^2.1",
         "composer/installers": "^1.9",
         "drupal/core-composer-scaffold": "^9.3",
         "drupal/core-project-message": "^9.3",
         "drupal/core-recommended": "^9.3",
         "drupal/core-vendor-hardening": "^9.3",
         "drupal/field_group": "^3.2",
-        "drush/drush": "^11.0"
+        "drush/drush": "^11.0",
+        "phpunit/phpunit": "^9.5",
+        "symfony/phpunit-bridge": "^6.0"
     },
     "conflict": {
         "drupal/drupal": "*"
@@ -87,5 +91,9 @@
                 "      composer remove drupal/core-project-message"
             ]
         }
+    },
+    "require-dev": {
+        "lchrusciel/api-test-case": "^5.2",
+        "phpspec/prophecy-phpunit": "^2"
     }
 }

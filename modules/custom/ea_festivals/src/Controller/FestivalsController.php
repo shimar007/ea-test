@@ -106,6 +106,7 @@ class FestivalsController extends ControllerBase {
 
         //getting festivals data from API
         try {
+            
             //reading festivals configuration
 	        $config = \Drupal::config('ea_festivals_config.settings');
 	        $ea_festivals_api_url = $config->get('ea_festivals_api_url');
@@ -114,73 +115,97 @@ class FestivalsController extends ControllerBase {
             $client_api = \Drupal::httpClient();
             $response_api = $client_api->request('GET', $ea_festivals_api_url);
 
-            //to get response body content and json decoding it
-            $json_array_data = json_decode($response_api->getBody()->getContents());
+            //check if response status code is 200 ok
+            if($response_api->getStatusCode() == 200) {
 
-            //get array length
-            $json_array_data_length = count($json_array_data);
+                //delete all festivals data - calling the delete function here
+                self::delete_festivals();
 
-            //looping through json data
-            for($i = 0; $i < $json_array_data_length; $i++) {
+                //to get response body content and json decoding it
+                $json_array_data = json_decode($response_api->getBody()->getContents());
 
-                //converting object to array
-                $json_array_data_values = (array)$json_array_data[$i];
+                //get array length
+                $json_array_data_length = count($json_array_data);
 
-                //check if array key name exists
-                if (array_key_exists('name', $json_array_data_values)) {
-                    //setting all content type variables
-                    $festival_name = $json_array_data_values['name'];
-                }
-                //if array key for festival name does not exits
-                else {
-                    $festival_name = "No Festival";
-                }
+                //looping through json data
+                for($i = 0; $i < $json_array_data_length; $i++) {
 
-                //create taxonomy band taxonomy & record label
-                if (array_key_exists('bands', $json_array_data_values)) {
+                    //converting object to array
+                    $json_array_data_values = (array)$json_array_data[$i];
 
-                    //convert band object to array
-                    $json_array_data_bands = (array)$json_array_data_values['bands'];
+                    //check if array key name exists
+                    if (array_key_exists('name', $json_array_data_values)) {
+                        //setting all content type variables
+                        $festival_name = $json_array_data_values['name'];
+                    }
+                    //if array key for festival name does not exits
+                    else {
+                        $festival_name = "No Festival";
+                    }
 
-                    //get bands array length
-                    $json_array_data_bands_length = count($json_array_data_bands);
+                    //create taxonomy band taxonomy & record label
+                    if (array_key_exists('bands', $json_array_data_values)) {
 
-                    for($j = 0; $j < $json_array_data_bands_length; $j++) {
-                        //setting band taxonomy
-                        $bands = self::get_bands($json_array_data_bands[$j]->name);
-                        
-                        //create taxonomy record labels
-                        if (isset($json_array_data_bands[$j]->recordLabel)) {
-                            //creating taxonomy record label 
-                            $recordLabel = self::get_record_label($json_array_data_bands[$j]->recordLabel);
+                        //convert band object to array
+                        $json_array_data_bands = (array)$json_array_data_values['bands'];
+
+                        //get bands array length
+                        $json_array_data_bands_length = count($json_array_data_bands);
+
+                        for($j = 0; $j < $json_array_data_bands_length; $j++) {
+                            //setting band taxonomy
+                            $bands = self::get_bands($json_array_data_bands[$j]->name);
+                            
+                            //create taxonomy record labels
+                            if (isset($json_array_data_bands[$j]->recordLabel)) {
+                                //creating taxonomy record label 
+                                $recordLabel = self::get_record_label($json_array_data_bands[$j]->recordLabel);
+                            }
+                            
+                            //creating festival node script
+                            $node = Node::create([
+                                'type' => 'festivals',
+                                'langcode' => 'en',
+                                'created' => REQUEST_TIME,
+                                'changed' => REQUEST_TIME,
+                                'title' => $festival_name,
+                                'field_festival_name' => $festival_name,
+                                'field_bands' => $bands,
+                                'field_record_labels' => $recordLabel
+                            ]);
+                            
+                            //unpublished setting for a node.
+                            $node->status = 1;
+
+                            //save node
+                            $node->save();
+
+                            //unset node
+                            unset($node);
                         }
-                        
-                        //creating festival node script
-                        $node = Node::create([
-                            'type' => 'festivals',
-                            'langcode' => 'en',
-                            'created' => REQUEST_TIME,
-                            'changed' => REQUEST_TIME,
-                            'title' => $festival_name,
-                            'field_festival_name' => $festival_name,
-                            'field_bands' => $bands,
-                            'field_record_labels' => $recordLabel
-                        ]);
-                        
-                        //unpublished setting for a node.
-                        $node->status = 1;
-
-                        //save node
-                        $node->save();
-
-                        //unset node
-                        unset($node);
                     }
                 }
+                print "All Festivals are added with the required classification\n";
             }
-
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
+    }
+
+    //delete all festivals
+    public function delete_festivals() {
+
+        //query to get all nodes data 
+        $query = \Drupal::entityQuery('node')->condition('type', 'festivals');
+
+        //get all node ids
+        $nids = $query->execute();
+
+        //using storage handler to delete all nodes
+        $storage_handler = \Drupal::entityTypeManager()->getStorage('node');
+        $entities = $storage_handler->loadMultiple($nids);
+        $storage_handler->delete($entities);
+
+        print "All Festivals are deleted\n";
     }
 }
