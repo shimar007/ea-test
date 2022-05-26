@@ -1,0 +1,20 @@
+uuid: f707288a-da5b-490d-9b02-72f58e760c89
+langcode: en
+status: true
+dependencies:
+  theme:
+    - ea
+_core:
+  default_config_hash: ItFhhiUOoeR7oIq73ZaCV7PAYrOwXZ-9fazMzF5DJXM
+id: ea_page_title
+theme: ea
+region: content
+weight: -50
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title'
+  label_display: '0'
+  provider: core
+visibility: {  }

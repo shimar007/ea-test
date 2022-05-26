@@ -1,0 +1,23 @@
+html {
+    font-size: 62.5%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+}
+
+body{
+    @include font-size(1.8rem);
+    line-height: 1.278;
+}
+
+h1 {
+    @include font-size(5rem);
+}
+
+h2 {
+    @include font-size(4rem);
+}
+
+h3 {
+    @include font-size(3rem);
+}

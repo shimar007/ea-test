@@ -8,3 +8,6 @@ sites/*/public
 sites/*/private
 sites/*/files-public
 sites/*/files-private
+
+node_modules
+services.yml

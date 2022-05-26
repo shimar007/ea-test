@@ -1,0 +1,22 @@
+uuid: 40d45411-3027-4e77-b945-c3eaf2ab215b
+langcode: en
+status: true
+dependencies:
+  theme:
+    - ea
+_core:
+  default_config_hash: Qf2BoIzd9py5AYXZj8fJzCYDyVk1-AWXcu-AqQeDZKA
+id: ea_local_tasks
+theme: ea
+region: content
+weight: -40
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Tabs
+  label_display: '0'
+  provider: core
+  primary: true
+  secondary: true
+visibility: {  }
